@@ -11,11 +11,14 @@ jobs:
     environment: Test
     container:
       image: node
+    defaults:
+      run:
+        working-directory: VmBDEExam
     steps: 
       - name: Checkout code
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
-      - name: install dependencies
+      - name: Install dependencies
         run: npm install
 
       - name: Build website
