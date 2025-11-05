@@ -12,14 +12,14 @@ jobs:
     defaults:
       run:
         working-directory: VmBDEExam
-    steps: 
+    steps:
       - name: Checkout code
         uses: actions/checkout@v4
 
       - name: Setup node
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v6
         with:
-          node-version: '20'
+          node-version: latest
 
       - name: Install dependencies
         run: npm install
@@ -33,19 +33,11 @@ jobs:
           server: ${{ vars.FTP_SERVER }}
           username: ${{ secrets.FTP_USERNAME }}
           password: ${{ secrets.FTP_PASSWORD }}
-          protocol: ftps-implicit
-          port: 990
-          server-dir: public_html/test/todo/
+          protocol: ftps
+          port: 21
+          server-dir: /public_html/test/todo/
           local-dir: VmBDEExam/dist/
-          timeout: 180000
-          max-tries: 5
-          security: loose
-          exclude: |
-            **/.git*
-            **/node_modules/**
-            **/test/**
-            **/tests/**
-            **/*.map
+          timeout: 60000
           log-level: verbose
 
       - name: Run TestCafe Tests
@@ -73,20 +65,12 @@ jobs:
       - name: FTP deployment
         uses: SamKirkland/FTP-Deploy-Action@4.3.3
         with:
-          server: ${{ vars.FTP_SERVER }} # e.g. ftp.simply.com
+          server: ${{ vars.FTP_SERVER }}
           username: ${{ secrets.FTP_USERNAME }}
           password: ${{ secrets.FTP_PASSWORD }}
-          protocol: ftps-implicit
-          port: 990
-          server-dir: public_html/live/todo/
+          protocol: ftps
+          port: 21
+          server-dir: /public_html/live/todo/
           local-dir: VmBDEExam/dist/
-          timeout: 180000
-          max-tries: 5
-          security: loose
-          exclude: |
-            **/.git*
-            **/node_modules/**
-            **/test/**
-            **/tests/**
-            **/*.map
+          timeout: 60000
           log-level: verbose
