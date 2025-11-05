@@ -1,5 +1,13 @@
 # Changelog
 
+## [1.1.0](https://github.com/VictorMo101/VmBDEExam/compare/v1.0.0...v1.1.0) (2025-11-05)
+
+
+### Features
+
+* Added checkmark function that toggles todo completion status ([9abf395](https://github.com/VictorMo101/VmBDEExam/commit/9abf3950dc09aa26a0bc04fc6afcb146a472fe3d))
+* added completion feature to todo task ([bf13d31](https://github.com/VictorMo101/VmBDEExam/commit/bf13d318c6cf6912732478b5e4aaaad01e98bf94))
+
 ## 1.0.0 (2025-11-05)
 
 
