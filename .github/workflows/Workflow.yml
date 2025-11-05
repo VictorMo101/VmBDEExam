@@ -32,7 +32,7 @@ jobs:
           password: ${{ secrets.FTP_PASSWORD }}
           protocol: ftps
           port: 21
-          server-dir: /test/todo/
+          server-dir: /public_html/test/todo/
           local-dir: VmBDEExam/dist/
           timeout: 60000
           log-level: verbose
