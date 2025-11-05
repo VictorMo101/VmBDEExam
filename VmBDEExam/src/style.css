@@ -27,9 +27,11 @@ body {
   padding: 0;
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  align-items: center;
   height: 100vh;
+}
+
+.todo-Container {
+  margin: 1rem auto 0 auto;
 }
 
 .quick-Buttons {
@@ -124,12 +126,13 @@ h1 {
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
-  margin: 0 0 1rem 0;
+  margin: 0 auto 1rem auto;
   overflow: hidden;
   
   background: var(--container-background-color);
   border-radius: var(--container-border-radius);
   box-shadow: var(--container-box-shadow);
+  width: 340px;
 }
 
 .todo-text {
@@ -176,5 +179,5 @@ h1 {
   color: green;
   background-color: rgba(0, 255, 0, 0.233);
   border-radius: var(--container-border-radius);
-  padding: 1rem 8.5rem 1rem 8.5rem; 
+  padding: 1rem 10rem 1rem 10rem; 
 }

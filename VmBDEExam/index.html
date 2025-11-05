@@ -7,20 +7,21 @@
     <title>VmBDEExam</title>
   </head>
   <body>
-    <div class="quick-Buttons">
-      <button class="clear-Button" id="clearButton">Clear<br>Completed</button>
-      <button class="toggle-Button" id="toggleButton">Toggle<br>All</button>
+    <div class="todo-Container">
+      <div class="quick-Buttons">
+        <button class="clear-Button" id="clearButton">Clear<br>Completed</button>
+        <button class="toggle-Button" id="toggleButton">Toggle<br>All</button>
+      </div>
+      <div class="container">
+        <h1>Todo App</h1>
+        <form class="todo-form">
+          <input type="text" id="todo-input" placeholder="Add a new todo" />
+          <button type="submit" id="addTodoButton">Add</button>
+        </form>
+        <p id="error-message">Please enter a todo item</p>
+      </div>
     </div>
-    <div class="container">
-      <h1>Todo App</h1>
-      <form class="todo-form">
-        <input type="text" id="todo-input" placeholder="Add a new todo" />
-        <button type="submit" id="addTodoButton">Add</button>
-      </form>
-
-      <p id="error-message">Please enter a todo item</p>
-      <ul class="todo-list" id="todo-list"></ul>
-    </div>
+     <ul class="todo-list" id="todo-list"></ul>
 
     <script type="module" src="/src/main.ts"></script>
   </body>
