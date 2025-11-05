@@ -93,3 +93,8 @@ h1 {
   margin-top: 5px;
   display: none;
 }
+
+.completed {
+  color: red;
+  text-decoration: line-through;
+}

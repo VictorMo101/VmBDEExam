@@ -33,13 +33,14 @@ const renderTodos = (): void => {
     const li = document.createElement('li');
     li.className = 'todo-item';
     li.innerHTML = `
-      <span>${todo.text}</span>
+      <span class="${todo.completed ? 'completed' : ''}">${todo.text}</span>
+      <input type="checkbox" ${todo.completed ? 'checked' : ''}>
       <button>Remove</button>
-         <button id="editBtn">Edit</button>
-    `;
+      <button id="editBtn">Edit</button>`;
 
     addRemoveButtonListener(li, todo.id); 
     addEditButtonListener(li, todo.id); 
+    addCheckboxListener(li, todo.id);
     todoList.appendChild(li); 
   });
 };
@@ -85,6 +86,22 @@ const editTodo = (id:number) => {
       todo.text = text
       renderTodos()
     }
+  }
+}
+
+const addCheckboxListener = (li: HTMLLIElement, id: number) => {
+  const checkBox = li.querySelector('input[type="checkbox"]') as HTMLInputElement;
+  checkBox.addEventListener('change', () => {
+    toggleTodoCompletion(id);
+  })
+}
+
+const toggleTodoCompletion = (id: number) => {
+  const todo = todos.find(todo => todo.id === id);
+  if (todo) {
+    todo.completed = !todo.completed;
+    renderTodos();
+    console.log("Toggled todo completion: ", todo);
   }
 }
 
