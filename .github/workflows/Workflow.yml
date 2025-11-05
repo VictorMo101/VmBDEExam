@@ -7,17 +7,19 @@ on:
 
 jobs:
   integration-delivery:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-22.04
     environment: Test
-    container:
-      image: node:18
-      options: --shm-size=1g --ipc=host
     defaults:
       run:
         working-directory: VmBDEExam
     steps: 
       - name: Checkout code
         uses: actions/checkout@v4
+
+      - name: Setup node
+        uses: actions/setup-node@v6
+        with:
+          node-version: latest
 
       - name: Install dependencies
         run: npm install
@@ -38,18 +40,7 @@ jobs:
           timeout: 60000
           log-level: verbose
 
-      - name: Install TestCafe
-        run: npm install -g testcafe
-
-      - name: Install Google Chrome
-        run: |
-          apt-get update
-          apt-get install -y wget gnupg
-          wget -q -O - https://dl.google.com/linux/linux_signing_key.pub | gpg --dearmor > /usr/share/keyrings/google-linux-keyring.gpg
-          echo "deb [arch=amd64 signed-by=/usr/share/keyrings/google-linux-keyring.gpg] http://dl.google.com/linux/chrome/deb/ stable main" > /etc/apt/sources.list.d/google-chrome.list
-          apt-get update
-          apt-get install -y google-chrome-stable
-
-      - name: Run tests
-        run: |
-          testcafe "chrome:headless --no-sandbox --disable-dev-shm-usage --disable-software-rasterizer" test/*
+      - name: Run TestCafe Tests
+        uses: DevExpress/testcafe-action@latest
+        with:
+          args: "chrome test/*"
