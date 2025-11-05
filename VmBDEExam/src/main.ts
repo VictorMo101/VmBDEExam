@@ -33,10 +33,14 @@ const renderTodos = (): void => {
     const li = document.createElement('li');
     li.className = 'todo-item';
     li.innerHTML = `
-      <span class="${todo.completed ? 'completed' : ''}">${todo.text}</span>
-      <input type="checkbox" ${todo.completed ? 'checked' : ''}>
-      <button>Remove</button>
-      <button id="editBtn">Edit</button>`;
+      <div class="todo-text">
+        <span class="${todo.completed ? 'completed' : ''}">${todo.text}</span>
+      </div>
+      <div class="todo-actions">
+        <input type="checkbox" ${todo.completed ? 'checked' : ''}>
+        <button>Remove</button>
+        <button id="editBtn">Edit</button>
+      </div>`;
 
     addRemoveButtonListener(li, todo.id); 
     addEditButtonListener(li, todo.id); 

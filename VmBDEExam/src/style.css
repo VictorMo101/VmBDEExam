@@ -46,39 +46,75 @@ h1 {
 .todo-form {
   display: flex;
   justify-content: space-between;
+
+  background: var(--container-background-color);
+  border-radius: var(--container-border-radius);
+  box-shadow: var(--container-box-shadow);
 }
 .todo-form input {
   flex: 1;
   padding: 10px;
   border: 1px solid #ccc;
-  border-radius: 3px;
+  border-top-left-radius: var(--container-border-radius);
+  border-bottom-left-radius: var(--container-border-radius);
 }
+
 .todo-form button {
   padding: 10px;
   border: none;
   background: #28a745;
+  font-weight: 700;
   color: #fff;
-  border-radius: 3px;
+  border-top-right-radius: var(--container-border-radius);
+  border-bottom-right-radius: var(--container-border-radius);
   cursor: pointer;
 }
+.todo-form button:hover {
+  background: #218838;
+}
+
 .todo-list {
   list-style: none;
   padding: 0;
 }
 .todo-item {
-  background: #f9f9f9;
-  padding: 10px;
-  border-bottom: 1px solid #ddd;
+  border: 1px solid #ddd;
   display: flex;
+  flex-direction: column;
   justify-content: space-between;
   align-items: center;
+  margin: 0 0 1rem 0;
+  
+  background: var(--container-background-color);
+  border-radius: var(--container-border-radius);
+  box-shadow: var(--container-box-shadow);
 }
+
+.todo-text {
+  padding: 1rem;
+}
+
 .todo-item button {
   border: none;
-  background: #dc3545;
-  color: #fff;
-  border-radius: 3px;
+  width: 50%;
+  border: 1px solid #ddd;
+  background-color: #c5c5c5;
+  color: black;
+  font-weight: 700;
+  padding: 0.5rem;
   cursor: pointer;
+}
+
+.todo-item button:hover {
+  background-color: #ff6c6c;
+
+}
+
+.todo-actions {
+  background-color: #c5c5c5;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
 }
 
 
@@ -95,6 +131,8 @@ h1 {
 }
 
 .completed {
-  color: red;
-  text-decoration: line-through;
+  color: green;
+  background-color: rgba(0, 255, 0, 0.233);
+  border-radius: var(--container-border-radius);
+  padding: 1rem 8.5rem 1rem 8.5rem; 
 }
