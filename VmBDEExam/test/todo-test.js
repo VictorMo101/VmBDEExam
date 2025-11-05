@@ -1,7 +1,10 @@
 import { Selector } from "testcafe";
 
 fixture("Todo Test One")
-    .page("https://verycookedhotel.dk/test/todo/");
+    .page("https://verycookedhotel.dk/test/todo/")
+    .beforeEach(async t => {
+        await t.maximizeWindow(); 
+    });
 
 test("Adding todo", async t => {
     await t
