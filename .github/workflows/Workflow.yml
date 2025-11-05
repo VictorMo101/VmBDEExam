@@ -10,7 +10,8 @@ jobs:
     runs-on: ubuntu-latest
     environment: Test
     container:
-      image: node
+      image: node:18
+      options: --shm-size=1g --ipc=host
     defaults:
       run:
         working-directory: VmBDEExam
@@ -40,11 +41,15 @@ jobs:
       - name: Install TestCafe
         run: npm install -g testcafe
 
-      - name: Update APT
-        run: apt-get update
-
-      - name: Install Chromium
-        run: apt-get install -y chromium
+      - name: Install Google Chrome
+        run: |
+          apt-get update
+          apt-get install -y wget gnupg
+          wget -q -O - https://dl.google.com/linux/linux_signing_key.pub | gpg --dearmor > /usr/share/keyrings/google-linux-keyring.gpg
+          echo "deb [arch=amd64 signed-by=/usr/share/keyrings/google-linux-keyring.gpg] http://dl.google.com/linux/chrome/deb/ stable main" > /etc/apt/sources.list.d/google-chrome.list
+          apt-get update
+          apt-get install -y google-chrome-stable
 
       - name: Run tests
-        run: testcafe "chromium:headless --no-sandbox --disable-gpu --disable-dev-shm-usage --disable-software-rasterizer" test/*
+        run: |
+          testcafe "chrome:headless --no-sandbox --disable-dev-shm-usage --disable-software-rasterizer" test/*
