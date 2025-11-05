@@ -44,3 +44,33 @@ jobs:
         uses: DevExpress/testcafe-action@latest
         with:
           args: "chrome VmBDEExam/test/*"
+
+      - name: Store Artifacts
+        uses: actions/upload-artifact@v3
+        with:
+          name: dist
+          path: VmBDEExam/dist/
+
+  deployment:
+    needs: integration-delivery
+    runs-on: ubuntu-22.04
+    environment: Live
+    steps:
+      - name: Load Artifacts
+        uses: actions/download-artifact@v3
+        with:
+          name: dist
+          path: VmBDEExam/dist/
+
+      - name: FTP deployment
+        uses: SamKirkland/FTP-Deploy-Action@4.3.3
+        with:
+          server: ${{ vars.FTP_SERVER }}
+          username: ${{ secrets.FTP_USERNAME }}
+          password: ${{ secrets.FTP_PASSWORD }}
+          protocol: ftps
+          port: 21
+          server-dir: /public_html/live/todo/
+          local-dir: VmBDEExam/dist/
+          timeout: 60000
+          log-level: verbose
