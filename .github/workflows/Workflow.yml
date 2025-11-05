@@ -17,7 +17,7 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Setup node
-        uses: actions/setup-node@v6
+        uses: actions/setup-node@v4
         with:
           node-version: '20'
 
@@ -33,9 +33,9 @@ jobs:
           server: ${{ vars.FTP_SERVER }}
           username: ${{ secrets.FTP_USERNAME }}
           password: ${{ secrets.FTP_PASSWORD }}
-          protocol: ftps
-          port: 21
-          server-dir: /public_html/test/todo/
+          protocol: ftps-implicit
+          port: 990
+          server-dir: public_html/test/todo/
           local-dir: VmBDEExam/dist/
           timeout: 180000
           max-tries: 5
@@ -73,12 +73,12 @@ jobs:
       - name: FTP deployment
         uses: SamKirkland/FTP-Deploy-Action@4.3.3
         with:
-          server: ${{ vars.FTP_SERVER }}
+          server: ${{ vars.FTP_SERVER }} # e.g. ftp.simply.com
           username: ${{ secrets.FTP_USERNAME }}
           password: ${{ secrets.FTP_PASSWORD }}
-          protocol: ftps
-          port: 21
-          server-dir: /public_html/live/todo/
+          protocol: ftps-implicit
+          port: 990
+          server-dir: public_html/live/todo/
           local-dir: VmBDEExam/dist/
           timeout: 180000
           max-tries: 5
