@@ -39,6 +39,11 @@ body {
   width: 340px;
   margin-bottom: 1rem;
   overflow: hidden;
+  display: flex;
+}
+
+.quick-Buttons button {
+  width: 50%;
 }
 
 .clear-Button {
@@ -52,6 +57,19 @@ body {
 
 .clear-Button:hover {
   background-color: #e60000;
+}
+
+.toggle-Button {
+  border: none;
+  padding: 10px;
+  background-color: #684dff;
+  color: white;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.toggle-Button:hover {
+  background-color: #4b00e6;
 }
 
 .container {
@@ -107,6 +125,7 @@ h1 {
   justify-content: space-between;
   align-items: center;
   margin: 0 0 1rem 0;
+  overflow: hidden;
   
   background: var(--container-background-color);
   border-radius: var(--container-border-radius);

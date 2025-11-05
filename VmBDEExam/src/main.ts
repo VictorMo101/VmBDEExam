@@ -12,6 +12,8 @@ const todoInput = document.getElementById('todo-input') as HTMLInputElement;
 const todoForm = document.querySelector('.todo-form') as HTMLFormElement;   
 const todoList = document.getElementById('todo-list') as HTMLUListElement;  
 const errorMessage = document.getElementById('error-message') as HTMLParagraphElement; 
+const clearCompletedButton = document.getElementById('clearButton') as HTMLButtonElement;
+const toggleAllButton = document.getElementById('toggleButton') as HTMLButtonElement;
 
 export const addTodo = (text: string): void => {
   const newTodo: Todo = {
@@ -109,8 +111,23 @@ const toggleTodoCompletion = (id: number) => {
   }
 }
 
+const clearCompletedTodos = (): void => {
+  todos = todos.filter(todo => !todo.completed);
+  renderTodos();
+};
+
+clearCompletedButton.addEventListener('click', () => clearCompletedTodos());
 
 
+const toggleAllTodos = (): void => {
+  const allCompleted = todos.every(todo => todo.completed);
+  todos.forEach(todo => {
+    todo.completed = !allCompleted;
+  });
+  renderTodos();
+}
+
+toggleAllButton.addEventListener('click', () => toggleAllTodos());
 
 /** 
  * Kristian: 6th of September 2024, BDE
