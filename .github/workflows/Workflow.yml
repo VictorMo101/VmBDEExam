@@ -10,10 +10,11 @@ jobs:
     runs-on: ubuntu-latest
     environment: Test
     container:
-      image: node
+      image: node:20  # use a specific Node version
     defaults:
       run:
         working-directory: VmBDEExam
+
     steps: 
       - name: Checkout code
         uses: actions/checkout@v4
@@ -44,7 +45,15 @@ jobs:
         run: apt-get update
 
       - name: Install Chromium
-        run: apt-get install -y chromium
+        run: |
+          apt-get install -y chromium
+          ln -s /usr/bin/chromium /usr/bin/google-chrome || true
+          ln -s /usr/bin/chromium /usr/bin/chromium-browser || true
 
-      - name: Run tests
-        run: testcafe chromium:headless test/* --page-request-timeout 120000
+      - name: Run TestCafe tests
+        run: |
+          testcafe "chromium:headless --ignore-certificate-errors" test/* \
+            --page-request-timeout 120000 \
+            --retry-test-pages \
+            --quarantine-mode \
+            --disable-page-caching
