@@ -19,7 +19,7 @@ jobs:
       - name: Setup node
         uses: actions/setup-node@v6
         with:
-          node-version: latest
+          node-version: '20'
 
       - name: Install dependencies
         run: npm install
@@ -37,7 +37,15 @@ jobs:
           port: 21
           server-dir: /public_html/test/todo/
           local-dir: VmBDEExam/dist/
-          timeout: 60000
+          timeout: 180000
+          max-tries: 5
+          security: loose
+          exclude: |
+            **/.git*
+            **/node_modules/**
+            **/test/**
+            **/tests/**
+            **/*.map
           log-level: verbose
 
       - name: Run TestCafe Tests
@@ -72,5 +80,13 @@ jobs:
           port: 21
           server-dir: /public_html/live/todo/
           local-dir: VmBDEExam/dist/
-          timeout: 60000
+          timeout: 180000
+          max-tries: 5
+          security: loose
+          exclude: |
+            **/.git*
+            **/node_modules/**
+            **/test/**
+            **/tests/**
+            **/*.map
           log-level: verbose
