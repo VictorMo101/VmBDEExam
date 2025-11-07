@@ -1,9 +1,13 @@
 import './style.css';
 
+type Priority = 'no-priority' | 'low' | 'medium' | 'high';
+
+type Sort = 'none' | 'sort-by-priority';
 export interface Todo {
   id: number;
   text: string;
   completed: boolean;
+  priority: Priority;
 }
 
 export let todos: Todo[] = [];
@@ -14,29 +18,45 @@ const todoList = document.getElementById('todo-list') as HTMLUListElement;
 const errorMessage = document.getElementById('error-message') as HTMLParagraphElement; 
 const clearCompletedButton = document.getElementById('clearButton') as HTMLButtonElement;
 const toggleAllButton = document.getElementById('toggleButton') as HTMLButtonElement;
+const prioritySelect = document.getElementById('priority') as HTMLSelectElement;
+const sortSelect = document.getElementById('sort') as HTMLSelectElement;
 
-export const addTodo = (text: string): void => {
+export const addTodo = (text: string, priority?: Priority): void => {
   const newTodo: Todo = {
     id: Date.now(), 
     text: text,
     completed: false,
+    priority: priority ?? ((prioritySelect?.value as Priority) || 'no-priority'),
   };
   todos.push(newTodo);
   console.log("Todo added: ", todos); 
   renderTodos();
 };
 
+const priorityRank: Record<Priority, number> = {
+  'no-priority': 0,
+  low: 1,
+  medium: 2,
+  high: 3,
+};
+
+let currentSort: Sort = (sortSelect?.value as Sort) || 'none';
 
 const renderTodos = (): void => { 
- 
   todoList.innerHTML = '';
 
-  todos.forEach(todo => { 
+  const items =
+    currentSort === 'sort-by-priority'
+        ? [...todos].sort((a, b) => priorityRank[a.priority] - priorityRank[b.priority])
+        : todos;
+
+  items.forEach(todo => {
     const li = document.createElement('li');
     li.className = 'todo-item';
     li.innerHTML = `
       <div class="todo-text">
         <span class="${todo.completed ? 'completed' : ''}">${todo.text}</span>
+        <span class="priority-badge ${todo.priority}">${todo.priority}</span>
       </div>
       <div class="todo-actions">
         <input type="checkbox" ${todo.completed ? 'checked' : ''}>
@@ -51,7 +71,11 @@ const renderTodos = (): void => {
   });
 };
 
-renderTodos(); 
+
+sortSelect?.addEventListener('change', () => {
+  currentSort = sortSelect.value as Sort;
+  renderTodos();
+});
 
 todoForm.addEventListener('submit', (event: Event) => {
   event.preventDefault(); 
@@ -129,6 +153,7 @@ const toggleAllTodos = (): void => {
 
 toggleAllButton.addEventListener('click', () => toggleAllTodos());
 
+
 /** 
  * Kristian: 6th of September 2024, BDE
  * 
@@ -174,8 +199,8 @@ toggleAllButton.addEventListener('click', () => toggleAllTodos());
 // Option 7: Add a dropdown to set the priority level (e.g., Low, Medium, High) for each todo item.
 // Display the priority level next to each todo item.
 // Sort todos by priority.
-// Search Functionality:
 
+// Search Functionality:
 // Option 8: Add a search input field to filter todos based on the search query.
 // Display only the todos that match the search query.
 // Category Tags:
