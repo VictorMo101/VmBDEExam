@@ -31,7 +31,7 @@ body {
 }
 
 .todo-Container {
-  margin: 1rem auto 0 auto;
+margin: 1rem auto;
 }
 
 .quick-Buttons {
@@ -180,4 +180,35 @@ h1 {
   color: green;
   background-color: rgba(0, 128, 0, 0.192);
   text-decoration: line-through;
+}
+
+.priorityContainer {
+  background: var(--container-background-color);
+  border-radius: var(--container-border-radius);
+  box-shadow: var(--container-box-shadow);
+  padding: 0.5rem;
+  border: 1px solid #ccc;
+  background-color: #f9f9f9;
+}
+
+.priorityContainer select {
+  width: 70%;
+  padding: 0.5rem;
+  border-radius: var(--container-border-radius);
+  border: 1px solid #ccc;
+  box-shadow: var(--container-box-shadow);
+}
+
+.priorityContainer label {
+  font-weight: 700;
+  display: inline-block;
+  width: auto;
+  padding: 0.5rem;
+}
+
+.priorityContainer option {
+  padding: 0.5rem;
+  background-color: #f9f9f9;
+  border: 1px solid #ccc;
+  border-radius: var(--container-border-radius);
 }

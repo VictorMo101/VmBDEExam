@@ -8,18 +8,30 @@
   </head>
   <body>
     <div class="todo-Container">
+      
       <div class="quick-Buttons">
         <button class="clear-Button" id="clearButton">Clear<br>Completed</button>
         <button class="toggle-Button" id="toggleButton">Toggle<br>All</button>
       </div>
-      <div class="container">
-        <h1>Todo App</h1>
-        <form class="todo-form">
-          <input type="text" id="todo-input" placeholder="Add a new todo" />
-          <button type="submit" id="addTodoButton">Add</button>
-        </form>
-        <p id="error-message">Please enter a todo item</p>
-      </div>
+
+        <div class="container">
+          <div class="priorityContainer">
+            <label for="priority">Priority:</label>
+            <select id="priority" name="priority">
+              <option value="low">Low</option>
+              <option value="medium">Medium</option>
+              <option value="high">High</option>
+            </select>
+          </div> 
+
+          <h1>Todo App</h1>
+          <form class="todo-form">
+            <input type="text" id="todo-input" placeholder="Add a new todo" />
+            <button type="submit" id="addTodoButton">Add</button>
+          </form>
+          <p id="error-message">Please enter a todo item</p>
+        </div>
+
     </div>
      <ul class="todo-list" id="todo-list"></ul>
 
