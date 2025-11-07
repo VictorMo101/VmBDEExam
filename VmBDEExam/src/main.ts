@@ -1,6 +1,8 @@
 import './style.css';
 
 type Priority = 'no-priority' | 'low' | 'medium' | 'high';
+
+type Sort = 'none' | 'sort-by-priority';
 export interface Todo {
   id: number;
   text: string;
@@ -17,6 +19,7 @@ const errorMessage = document.getElementById('error-message') as HTMLParagraphEl
 const clearCompletedButton = document.getElementById('clearButton') as HTMLButtonElement;
 const toggleAllButton = document.getElementById('toggleButton') as HTMLButtonElement;
 const prioritySelect = document.getElementById('priority') as HTMLSelectElement;
+const sortSelect = document.getElementById('sort') as HTMLSelectElement;
 
 export const addTodo = (text: string, priority?: Priority): void => {
   const newTodo: Todo = {
@@ -30,11 +33,24 @@ export const addTodo = (text: string, priority?: Priority): void => {
   renderTodos();
 };
 
+const priorityRank: Record<Priority, number> = {
+  'no-priority': 0,
+  low: 1,
+  medium: 2,
+  high: 3,
+};
+
+let currentSort: Sort = (sortSelect?.value as Sort) || 'none';
 
 const renderTodos = (): void => { 
   todoList.innerHTML = '';
-  todos.forEach(todo => {
 
+  const items =
+    currentSort === 'sort-by-priority'
+        ? [...todos].sort((a, b) => priorityRank[a.priority] - priorityRank[b.priority])
+        : todos;
+
+  items.forEach(todo => {
     const li = document.createElement('li');
     li.className = 'todo-item';
     li.innerHTML = `
@@ -55,7 +71,11 @@ const renderTodos = (): void => {
   });
 };
 
-renderTodos(); 
+
+sortSelect?.addEventListener('change', () => {
+  currentSort = sortSelect.value as Sort;
+  renderTodos();
+});
 
 todoForm.addEventListener('submit', (event: Event) => {
   event.preventDefault(); 
@@ -132,6 +152,7 @@ const toggleAllTodos = (): void => {
 }
 
 toggleAllButton.addEventListener('click', () => toggleAllTodos());
+
 
 /** 
  * Kristian: 6th of September 2024, BDE
