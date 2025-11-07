@@ -45,10 +45,11 @@ margin: 1rem auto;
 }
 
 .quick-Buttons button {
-  width: 50%;
+  width: 33%;
 }
 
 .clear-Button {
+  font-size: 14px;
   border: none;
   padding: 10px;
   background-color: #ff4d4d;
@@ -62,6 +63,7 @@ margin: 1rem auto;
 }
 
 .toggle-Button {
+  font-size: 14px;
   border: none;
   padding: 10px;
   background-color: #684dff;
@@ -72,6 +74,24 @@ margin: 1rem auto;
 
 .toggle-Button:hover {
   background-color: #4b00e6;
+}
+
+.sort-Container {
+  width: 33%;
+  padding: 10px;
+  background-color: #af4dff;
+  color: white;
+  font-weight: 700;
+  text-align: center;
+  font-size: 14px;
+}
+
+.sort-Container select {
+  padding: 0.2rem;
+  margin-top: 0.5rem;
+  border-radius: var(--container-border-radius);
+  border: 1px solid #ccc;
+  box-shadow: var(--container-box-shadow);
 }
 
 .container {
