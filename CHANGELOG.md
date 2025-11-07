@@ -1,5 +1,14 @@
 # Changelog
 
+## [1.1.1](https://github.com/VictorMo101/VmBDEExam/compare/v1.1.0...v1.1.1) (2025-11-07)
+
+
+### Features
+
+* Able to give todos a priority level. If no priority level wont display. ([4c4791d](https://github.com/VictorMo101/VmBDEExam/commit/4c4791dbbecf5356c0db32f523ebb7c0155c4045))
+* Added Clear all completed button and Toggle all todo button. ([6698c16](https://github.com/VictorMo101/VmBDEExam/commit/6698c168f136e5d7fb60e693d9b7ca180cb244de))
+* Sorting feature. Able to sort between none and priority level ([7ac52f3](https://github.com/VictorMo101/VmBDEExam/commit/7ac52f36974bf8cbf7afa4021538e244bf78756c))
+
 ## [1.1.0](https://github.com/VictorMo101/VmBDEExam/compare/v1.0.0...v1.1.0) (2025-11-05)
 
 
