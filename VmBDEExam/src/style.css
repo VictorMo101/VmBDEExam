@@ -212,3 +212,34 @@ h1 {
   border: 1px solid #ccc;
   border-radius: var(--container-border-radius);
 }
+
+.priority-badge {
+  font-size: 0.75rem;
+  font-weight: 700;
+  padding: 0.2rem 0.6rem;
+  border-radius: 1rem;
+  text-transform: capitalize;
+  border: 1px solid transparent;
+}
+
+.priority-badge.no-priority {
+  display: none;
+}
+
+.priority-badge.low {
+  color: #0b63ce;
+  background-color: #e7f2ff;
+  border-color: #b6d7ff;
+}
+
+.priority-badge.medium {
+  color: #a45500;
+  background-color: #fff1e0;
+  border-color: #ffd4a8;
+}
+
+.priority-badge.high {
+  color: #b80000;
+  background-color: #ffe5e5;
+  border-color: #ffb3b3;
+}

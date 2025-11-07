@@ -1,9 +1,11 @@
 import './style.css';
 
+type Priority = 'no-priority' | 'low' | 'medium' | 'high';
 export interface Todo {
   id: number;
   text: string;
   completed: boolean;
+  priority: Priority;
 }
 
 export let todos: Todo[] = [];
@@ -14,12 +16,14 @@ const todoList = document.getElementById('todo-list') as HTMLUListElement;
 const errorMessage = document.getElementById('error-message') as HTMLParagraphElement; 
 const clearCompletedButton = document.getElementById('clearButton') as HTMLButtonElement;
 const toggleAllButton = document.getElementById('toggleButton') as HTMLButtonElement;
+const prioritySelect = document.getElementById('priority') as HTMLSelectElement;
 
-export const addTodo = (text: string): void => {
+export const addTodo = (text: string, priority?: Priority): void => {
   const newTodo: Todo = {
     id: Date.now(), 
     text: text,
     completed: false,
+    priority: priority ?? ((prioritySelect?.value as Priority) || 'no-priority'),
   };
   todos.push(newTodo);
   console.log("Todo added: ", todos); 
@@ -28,15 +32,15 @@ export const addTodo = (text: string): void => {
 
 
 const renderTodos = (): void => { 
- 
   todoList.innerHTML = '';
+  todos.forEach(todo => {
 
-  todos.forEach(todo => { 
     const li = document.createElement('li');
     li.className = 'todo-item';
     li.innerHTML = `
       <div class="todo-text">
         <span class="${todo.completed ? 'completed' : ''}">${todo.text}</span>
+        <span class="priority-badge ${todo.priority}">${todo.priority}</span>
       </div>
       <div class="todo-actions">
         <input type="checkbox" ${todo.completed ? 'checked' : ''}>
@@ -174,8 +178,8 @@ toggleAllButton.addEventListener('click', () => toggleAllTodos());
 // Option 7: Add a dropdown to set the priority level (e.g., Low, Medium, High) for each todo item.
 // Display the priority level next to each todo item.
 // Sort todos by priority.
-// Search Functionality:
 
+// Search Functionality:
 // Option 8: Add a search input field to filter todos based on the search query.
 // Display only the todos that match the search query.
 // Category Tags:
